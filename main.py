@@ -3,6 +3,9 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.distributions.categorical import Categorical
 from torch.distributions.bernoulli import Bernoulli
+from transformers import AutoTokenizer, AutoModelWithLMHead
+from bpemb import BPEmb
+import sentencepiece as spm
 
 from torchtext import data
 from torchtext import datasets
@@ -50,12 +53,6 @@ parser.add_argument(
     default=0.0,
     help="add noise to labels during training"
 )
-parser.add_argument(
-    "--subword",
-    type=str,
-    default=None,
-    help="specifies which subword tokenization methods to use"
-)
 args = parser.parse_args()
 
 if not os.path.exists("saved_models"):
@@ -74,14 +71,10 @@ torch.backends.cudnn.deterministic = True
 
 params = json.load(open("config.json"))
 
-
 def main():
     print("Running main.py in {} mode with lang: {}".format(args.mode, args.lang))
     # define fields for your data, we have two: the text itself and the POS tag
-    if args.subword != None:
-        TEXT = data.SubwordField()
-    else:
-        TEXT = data.Field(lower=True)
+    TEXT = data.Field(lower=True)
     UD_TAGS = data.Field()
 
     fields = (("text", TEXT), ("udtags", UD_TAGS))
@@ -243,7 +236,6 @@ def categorical_accuracy(preds, y, tag_pad_idx, tag_unk_idx, UD_TAGS=None):
         return ret[0], ret[1], correct_tag_counter, precision_denomin_counter, recall_denomin_counter
     else:
         return ret
-
 
 def train(model, iterator, optimizer, criterion, tag_pad_idx, tag_unk_idx, UD_TAGS=None, noise=0):
 
