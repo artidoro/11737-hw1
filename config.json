@@ -1,5 +1,6 @@
 {
     "embedding_dim": 100,
+    "lang_embeddding_dim": 10,
     "hidden_dim":128,
     "n_layers":2,
     "bidirectional":true,

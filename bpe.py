@@ -166,7 +166,7 @@ ext = ['sm', 'md', 'lg']
 inside_word_token = 'INSIDE_WORD'
 path_ml = os.path.join('data', 'ml')
 
-for size in ['sm', 'md', 'lg']:
+for size in ['sm', 'md']: #, 'lg']:
     prefixed = [filename for filename in os.listdir(path_ml) if filename.startswith(f'ml-{size}') and filename.endswith('model')]
     assert len(prefixed) == 1, prefixed
     sp = spm.SentencePieceProcessor(model_file=os.path.join(path_ml, prefixed[0]))
