@@ -1,11 +1,18 @@
 #%%
+#####################################################################################
+## Setup so that there are files without the tags that we can use to train tokenizer.
+#####################################################################################
 import os
-for lang in os.listdir('data'):
+for lang in [lang for lang in os.listdir('data') if lang != 'ml']:
     with open(os.path.join('data', lang, f'{lang}-ud-train.conll')) as infile,\
         open(os.path.join('data', lang, f'{lang}-ud-train.notags'), 'w') as outfile:
         for line in infile:
             outfile.write(line.split('\t')[0].lower()+'\n')
+
 # %%
+#####################################################################################
+# Train tokenizer by language on 3 sizes
+#####################################################################################
 import os
 import sentencepiece as spm
 from tqdm import tqdm
@@ -43,16 +50,19 @@ os.chdir(path)
 
 
 # %%
+#####################################################################################
+# Create tokenized dataset by language
+#####################################################################################
 import os
 import sentencepiece as spm
 from tqdm import tqdm
 
 
-langs = os.listdir('data')
+langs = ["en", "cs", "es", "ar", "hy", "lt", "af", "ta"]
 ext = ['sm', 'md', 'lg']
 inside_word_token = 'INSIDE_WORD'
 
-for lang in langs:
+for lang in tqdm(langs):
     path=os.path.join('data', lang)
     for in_file_name in [f'{lang}-ud-{mode}.conll' for mode in ['test', 'dev', 'train']]:
         with open(os.path.join(path, in_file_name)) as in_file:
@@ -166,7 +176,7 @@ ext = ['sm', 'md', 'lg']
 inside_word_token = 'INSIDE_WORD'
 path_ml = os.path.join('data', 'ml')
 
-for size in ['sm', 'md']: #, 'lg']:
+for size in ['sm', 'md', 'lg']:
     prefixed = [filename for filename in os.listdir(path_ml) if filename.startswith(f'ml-{size}') and filename.endswith('model')]
     assert len(prefixed) == 1, prefixed
     sp = spm.SentencePieceProcessor(model_file=os.path.join(path_ml, prefixed[0]))
@@ -185,18 +195,68 @@ for size in ['sm', 'md']: #, 'lg']:
                     else:
                         words.append('')
                         tags.append('')
+                    out_file_name = 'mlour-' + in_file_name + f'.bpe-{size}'
+
+                with open(os.path.join(path, out_file_name), 'w') as out_file:
+                    encoded_words = sp.encode(words, out_type=str)
+                    assert len(encoded_words) == len(tags)
+                    for encoded_word, tag in zip(encoded_words, tags):
+                        if tag == '':
+                            out_file.write('\n')
+                        else:
+                            for i, token in enumerate(encoded_word):
+                                if i == 0:
+                                    out_file.write(f'{token}\t{tag}\n')
+                                else:
+                                    out_file.write(f'{token}\t{inside_word_token}\n')
+
+# %%
+# %%
+##############################################################
+# Tokenize with pretrained tokenizer
+##############################################################
+import os
+from tqdm import tqdm
+from bpemb import BPEmb
+
+
+langs = [elt  for elt in os.listdir('data') if elt != 'ml']
+ext = ['sm', 'md', 'lg']
+inside_word_token = 'INSIDE_WORD'
+path_ml = os.path.join('data', 'ml')
+
+for size, vocab_size in zip(['sm', 'md', 'lg'], [100000, 320000, 1000000]):
+    prefixed = [filename for filename in os.listdir(path_ml) if filename.startswith(f'ml-{size}') and filename.endswith('model')]
+    assert len(prefixed) == 1, prefixed
+    multibpemb = BPEmb(lang="multi", vs=vocab_size, dim=300)
+    for lang in langs:
+        print(lang)
+        path=os.path.join('data', lang)
+        for in_file_name in [f'{lang}-ud-{mode}.conll' for mode in ['test', 'dev', 'train']]:
+            with open(os.path.join(path, in_file_name)) as in_file:
+                words, tags = [], []
+                for line in in_file.readlines():
+                    split = line.strip().split('\t')
+                    if len(split) > 1:
+                        word, tag = split[0], split[1]
+                        words.append(word)
+                        tags.append(tag)
+                    else:
+                        words.append('')
+                        tags.append('')
                     out_file_name = 'ml-' + in_file_name + f'.bpe-{size}'
-                    with open(os.path.join(path, out_file_name), 'w') as out_file:
-                        encoded_words = sp.encode(words, out_type=str)
-                        assert len(encoded_words) == len(tags)
-                        for encoded_word, tag in zip(encoded_words, tags):
-                            if tag == '':
-                                out_file.write('\n')
-                            else:
-                                for i, token in enumerate(encoded_word):
-                                    if i == 0:
-                                        out_file.write(f'{token}\t{tag}\n')
-                                    else:
-                                        out_file.write(f'{token}\t{inside_word_token}\n')
+
+                with open(os.path.join(path, out_file_name), 'w') as out_file:
+                    encoded_words = multibpemb.encode(words)
+                    assert len(encoded_words) == len(tags)
+                    for encoded_word, tag in zip(encoded_words, tags):
+                        if tag == '':
+                            out_file.write('\n')
+                        else:
+                            for i, token in enumerate(encoded_word):
+                                if i == 0:
+                                    out_file.write(f'{token}\t{tag}\n')
+                                else:
+                                    out_file.write(f'{token}\t{inside_word_token}\n')
 
 # %%

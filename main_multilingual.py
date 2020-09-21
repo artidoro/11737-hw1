@@ -178,14 +178,16 @@ def main():
     model = model.to(device)
     criterion = criterion.to(device)
 
-    train_iterator = {lang:lang_iterators[lang]['train_iterator'].__iter__() for lang in LANGS}
-    valid_iterator = {lang:lang_iterators[lang]['valid_iterator'].__iter__() for lang in LANGS}
-    test_iterator = {lang:lang_iterators[lang]['test_iterator'].__iter__() for lang in LANGS}
+    valid_iterator = {lang:lang_iterators[lang]['valid_iterator'] for lang in LANGS}
+    test_iterator = {lang:lang_iterators[lang]['test_iterator'] for lang in LANGS}
 
     if args.mode == "train":
         N_EPOCHS = 10
-        EPOCH_SAMPLES = int(LANG_INFOS['nb_sent']['cs']/LANG_INFOS['q-0.7']['cs'])
+        EPOCH_SAMPLES = 100000
         best_valid_loss = float("inf")
+        for lang in LANGS:
+            lang_iterators[lang]['train_iterator'].init_epoch()
+        train_iterator = {lang:lang_iterators[lang]['train_iterator'].__iter__() for lang in LANGS}
         for epoch in range(N_EPOCHS):
             start_time = time.time()
             train_loss, train_acc = train(
@@ -200,7 +202,7 @@ def main():
                 UD_TAGS,
                 noise=args.noise
             )
-            valid_loss, valid_acc = evaluate(
+            valid_loss, valid_acc, valid_loss_lang, valid_acc_lang = evaluate(
                 model, valid_iterator, criterion, TAG_PAD_IDX, TAG_UNK_IDX, INSIDE_WORD_IDX
             )
             end_time = time.time()
@@ -226,10 +228,12 @@ def main():
         )
         return
 
-    test_loss, test_acc, test_p, test_r, test_f1, counter = evaluate(
+    test_loss, test_acc, test_loss_lang, test_acc_lang, test_p, test_r, test_f1, counter = evaluate(
         model, test_iterator, criterion, TAG_PAD_IDX, TAG_UNK_IDX, INSIDE_WORD_IDX, UD_TAGS
     )
     print(f"Test Loss: {test_loss:.3f} |  Test Acc: {test_acc*100:.2f}%")
+    for lang in LANGS:
+        print(f'{lang} \t Test Loss: {test_loss_lang[lang]:.3f} |  Test Acc: {test_acc_lang[lang]*100:.2f}%')
     print(f"Number of tokens in the training set: {sum(TEXT.vocab.freqs.values())}")
     print("Tag\t\tCount\t\tPercent\t\tP\t\tR\t  \tF1\n")
     for tag, count, percent in tag_percentage(counter.most_common()):
@@ -288,7 +292,8 @@ def train(model, iterator, EPOCH_SAMPLES, optimizer, criterion, tag_pad_idx, tag
     c = Categorical(torch.tensor([LANG_INFOS['q-0.7'][lang] for lang in LANGS]).cuda())
     # batch_lang_idx_dict = {LANGS[i]:torch.tensor([i]*params['batch_size'], requires_grad=False).cuda() for i in range(len(LANGS))}
 
-    for sample_nb in range(0, EPOCH_SAMPLES, params['batch_size']):
+    print(f'Begining training on {EPOCH_SAMPLES}')
+    for sample_nb in tqdm(range(0, EPOCH_SAMPLES, params['batch_size'])):
         lang_idx = c.sample().item()
         lang = LANGS[lang_idx]
         batch = next(iterator[lang])
@@ -337,9 +342,9 @@ def train(model, iterator, EPOCH_SAMPLES, optimizer, criterion, tag_pad_idx, tag
 
 def evaluate(model, iterator, criterion, tag_pad_idx, tag_unk_idx, inside_word_idx, UD_TAGS=None):
 
-    epoch_loss = 0
-    epoch_correct = 0
-    epoch_n_label = 0
+    epoch_loss = defaultdict(float)
+    epoch_correct = defaultdict(float)
+    epoch_n_label = defaultdict(float)
 
     model.eval()
 
@@ -347,34 +352,43 @@ def evaluate(model, iterator, criterion, tag_pad_idx, tag_unk_idx, inside_word_i
     precision_denomin_counter = Counter()
     recall_denomin_counter = Counter()
     with torch.no_grad():
+        for lang_idx, lang in tqdm(enumerate(LANGS)):
+            for batch_idx, batch in enumerate(iterator[lang]):
+                if batch_idx > len(iterator[lang]):
+                    break
+                
+                text = batch.text
+                tags = batch.udtags
 
-        for batch in iterator:
+                batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(text.shape, lang_idx, requires_grad=False)
 
-            text = batch.text
-            tags = batch.udtags
+                predictions = model(text, batch_lang_idx)
 
-            predictions = model(text)
+                predictions = predictions.view(-1, predictions.shape[-1])
+                tags = tags.view(-1)
 
-            predictions = predictions.view(-1, predictions.shape[-1])
-            tags = tags.view(-1)
+                loss = criterion(predictions, tags)
 
-            loss = criterion(predictions, tags)
-
-            if UD_TAGS != None:
-                correct, n_labels, c_counter, p_counter, r_counter = categorical_accuracy(
-                    predictions, tags, tag_pad_idx, tag_unk_idx, inside_word_idx, UD_TAGS
-                )
-                correct_tag_counter += c_counter
-                precision_denomin_counter += p_counter
-                recall_denomin_counter += r_counter
-            else:
-                correct, n_labels= categorical_accuracy(
-                    predictions, tags, tag_pad_idx, tag_unk_idx, inside_word_idx
-                )
-            epoch_loss += loss.item()
-            epoch_correct += correct.item()
-            epoch_n_label += n_labels
-
+                if UD_TAGS != None:
+                    correct, n_labels, c_counter, p_counter, r_counter = categorical_accuracy(
+                        predictions, tags, tag_pad_idx, tag_unk_idx, inside_word_idx, UD_TAGS
+                    )
+                    correct_tag_counter += c_counter
+                    precision_denomin_counter += p_counter
+                    recall_denomin_counter += r_counter
+                else:
+                    correct, n_labels= categorical_accuracy(
+                        predictions, tags, tag_pad_idx, tag_unk_idx, inside_word_idx
+                    )
+                epoch_loss[lang] += loss.item()
+                epoch_correct[lang] += correct.item()
+                epoch_n_label[lang] += n_labels
+    tot_acc = sum([epoch_correct[lang] for lang in LANGS]) / sum([epoch_n_label[lang] for lang in LANGS])
+    tot_epoch_loss = sum(epoch_loss.values()) / sum([len(iterator[lang]) for lang in LANGS])
+    acc = dict()
+    for lang in LANGS:
+        epoch_loss[lang] = epoch_loss[lang]/len(iterator[lang])
+        acc[lang] = epoch_correct[lang] / epoch_n_label[lang]
     if UD_TAGS != None:
         precision, recall, f1 = dict(), dict(), dict()
         for tag in UD_TAGS.vocab.freqs.keys():
@@ -390,9 +404,9 @@ def evaluate(model, iterator, criterion, tag_pad_idx, tag_unk_idx, inside_word_i
                 f1[tag] = 2*precision[tag]*recall[tag]/(precision[tag]+recall[tag])
             else:
                 f1[tag] = -0.01
-        return epoch_loss / len(iterator), epoch_correct / epoch_n_label, precision, recall, f1, recall_denomin_counter
+        return tot_epoch_loss, tot_acc, epoch_loss , acc, precision, recall, f1, recall_denomin_counter
     else:
-        return epoch_loss / len(iterator), epoch_correct / epoch_n_label
+        return tot_epoch_loss, tot_acc, epoch_loss, acc
 
 
 def epoch_time(start_time, end_time):

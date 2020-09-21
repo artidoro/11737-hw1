@@ -1,8 +1,8 @@
 {
     "embedding_dim": 100,
-    "lang_embeddding_dim": 10,
+    "lang_embeddding_dim": 20,
     "hidden_dim":128,
-    "n_layers":2,
+    "n_layers":4,
     "bidirectional":true,
     "dropout":0.25,
     "batch_size": 128

@@ -1,0 +1,100 @@
+Running main.py in train mode with lang: ml
+Unique tokens in TEXT vocabulary: 87004
+Unique tokens in UD_TAG vocabulary: 21
+
+Number of training examples: 80494
+Number of validation examples: 14750
+Number of tokens in the training set: 3213306
+Number of testing examples: 14710
+Tag		Count		Percentage
+
+INSIDE_WORD		1551181		48.3%
+NOUN		388788		12.1%
+PUNCT		205667		 6.4%
+ADP		193014		 6.0%
+VERB		176310		 5.5%
+ADJ		154075		 4.8%
+PROPN		98090		 3.1%
+DET		92258		 2.9%
+PRON		81396		 2.5%
+ADV		65328		 2.0%
+CONJ		64865		 2.0%
+NUM		40177		 1.3%
+AUX		29329		 0.9%
+SCONJ		26501		 0.8%
+X		21763		 0.7%
+PART		15135		 0.5%
+CCONJ		5399		 0.2%
+SYM		3158		 0.1%
+INTJ		872		 0.0%
+The model has 10,147,749 trainable parameters
+Begining training on 100000
+Epoch: 01 | Epoch Time: 1m 57s
+	Train Loss: 100.602 | Train Acc: 67.54%
+	 Val. Loss: 0.474 |  Val. Acc: 88.62%
+Begining training on 100000
+Epoch: 02 | Epoch Time: 2m 8s
+	Train Loss: 29.512 | Train Acc: 91.42%
+	 Val. Loss: 0.335 |  Val. Acc: 92.10%
+Begining training on 100000
+Epoch: 03 | Epoch Time: 2m 5s
+	Train Loss: 19.846 | Train Acc: 94.18%
+	 Val. Loss: 0.278 |  Val. Acc: 93.49%
+Begining training on 100000
+Epoch: 04 | Epoch Time: 2m 5s
+	Train Loss: 15.542 | Train Acc: 95.41%
+	 Val. Loss: 0.260 |  Val. Acc: 94.11%
+Begining training on 100000
+Epoch: 05 | Epoch Time: 1m 53s
+	Train Loss: 12.795 | Train Acc: 96.10%
+	 Val. Loss: 0.249 |  Val. Acc: 94.52%
+Begining training on 100000
+Epoch: 06 | Epoch Time: 2m 0s
+	Train Loss: 10.643 | Train Acc: 96.74%
+	 Val. Loss: 0.249 |  Val. Acc: 94.70%
+Begining training on 100000
+Epoch: 07 | Epoch Time: 2m 1s
+	Train Loss: 9.099 | Train Acc: 97.19%
+	 Val. Loss: 0.251 |  Val. Acc: 94.80%
+Begining training on 100000
+Epoch: 08 | Epoch Time: 1m 53s
+	Train Loss: 7.813 | Train Acc: 97.53%
+	 Val. Loss: 0.259 |  Val. Acc: 94.87%
+Begining training on 100000
+Epoch: 09 | Epoch Time: 2m 2s
+	Train Loss: 6.849 | Train Acc: 97.84%
+	 Val. Loss: 0.267 |  Val. Acc: 94.89%
+Begining training on 100000
+Epoch: 10 | Epoch Time: 2m 4s
+	Train Loss: 5.964 | Train Acc: 98.11%
+	 Val. Loss: 0.280 |  Val. Acc: 94.84%
+Test Loss: 0.286 |  Test Acc: 94.11%
+en 	 Test Loss: 0.458 |  Test Acc: 91.67%
+cs 	 Test Loss: 0.170 |  Test Acc: 95.59%
+es 	 Test Loss: 0.339 |  Test Acc: 92.96%
+ar 	 Test Loss: 0.112 |  Test Acc: 97.31%
+hy 	 Test Loss: 0.724 |  Test Acc: 86.94%
+lt 	 Test Loss: 0.916 |  Test Acc: 80.78%
+af 	 Test Loss: 0.390 |  Test Acc: 92.54%
+ta 	 Test Loss: 1.997 |  Test Acc: 78.68%
+Number of tokens in the training set: 3213306
+Tag		Count		Percent		P		R	  	F1
+
+NOUN		66586.0		24.5%		94.2%		92.7%		93.4%
+PUNCT		37197.0		13.7%		99.8%		99.8%		99.8%
+VERB		30452.0		11.2%		93.4%		91.4%		92.4%
+ADJ		28018.0		10.3%		91.1%		91.1%		91.1%
+ADP		26616.0		 9.8%		96.7%		97.7%		97.2%
+PRON		14032.0		 5.2%		94.4%		96.2%		95.3%
+PROPN		13042.0		 4.8%		83.5%		91.6%		87.4%
+ADV		12919.0		 4.7%		92.4%		88.9%		90.6%
+CONJ		9994.0		 3.7%		97.1%		98.5%		97.8%
+DET		8614.0		 3.2%		94.4%		96.3%		95.4%
+NUM		6820.0		 2.5%		95.6%		95.9%		95.8%
+AUX		5283.0		 1.9%		90.3%		93.4%		91.8%
+SCONJ		4646.0		 1.7%		93.2%		95.7%		94.5%
+PART		3196.0		 1.2%		86.6%		89.6%		88.1%
+X		2965.0		 1.1%		93.6%		85.2%		89.2%
+CCONJ		1105.0		 0.4%		89.5%		92.2%		90.9%
+SYM		532.0		 0.2%		90.4%		88.9%		89.7%
+INTJ		201.0		 0.1%		87.3%		47.8%		61.7%
