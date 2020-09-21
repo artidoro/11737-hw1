@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.distributions.categorical import Categorical
 from torch.distributions.bernoulli import Bernoulli
-from transformers import AutoTokenizer, AutoModelWithLMHead
-from bpemb import BPEmb
+# from transformers import AutoTokenizer, AutoModelWithLMHead
+# from bpemb import BPEmb
 import sentencepiece as spm
 
 from torchtext import data
@@ -26,7 +26,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 INSIDE_WORD = 'INSIDE_WORD'
-
+LANGS = ["en", "cs", "es", "ar", "hy", "lt", "af", "ta"]
 # set command line options
 parser = argparse.ArgumentParser(description="main.py")
 parser.add_argument(
@@ -35,13 +35,6 @@ parser.add_argument(
     choices=["train", "eval"],
     default="train",
     help="Run mode",
-)
-parser.add_argument(
-    "--lang",
-    type=str,
-    choices=["en", "cs", "es", "ar", "hy", "lt", "af", "ta"],
-    default="en",
-    help="Language code",
 )
 parser.add_argument(
     "--model-name",
