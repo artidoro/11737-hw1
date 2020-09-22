@@ -11,6 +11,7 @@ from torchtext import data
 from torchtext import datasets
 
 from model import BiLSTMPOSTagger
+from data_utils import POSIterator, POSIteratorML
 
 import numpy as np
 from collections import Counter, defaultdict
@@ -26,7 +27,8 @@ import warnings
 warnings.filterwarnings("ignore")
 
 INSIDE_WORD = 'INSIDE_WORD'
-LANGS = ["en", "cs", "es", "ar", "hy", "lt", "af", "ta"]
+# LANGS = ["en", "cs", "es", "ar", "hy", "lt", "af", "ta"]
+LANGS = ["af", "ta"]
 LANG_INFOS = json.loads(open('lang_infos.json').read())
 # set command line options
 parser = argparse.ArgumentParser(description="main.py")
@@ -62,6 +64,12 @@ parser.add_argument(
     default='',
     help="specifies which subword tokenization methods to use"
 )
+parser.add_argument(
+    "--bpe_model",
+    type=str,
+    default='ml-100000',
+    help="which bpe model to use if using bpe"
+)
 args = parser.parse_args()
 
 if not os.path.exists("saved_models"):
@@ -78,7 +86,7 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
-params = json.load(open("config.json"))
+params = json.load(open("config-ml-debug.json"))
 
 def main():
     print("Running main.py in {} mode with lang: {}".format(args.mode, args.lang))
@@ -135,19 +143,18 @@ def main():
             repeat=True,
         )
 
+    with open('char_vocab.json') as infile:
+        chartoi = json.loads(infile.read())
+
     PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
     model = BiLSTMPOSTagger(
-        input_dim=len(TEXT.vocab),
-        embedding_dim=params["embedding_dim"],
-        hidden_dim=params["hidden_dim"],
-        output_dim=len(UD_TAGS.vocab),
-        n_layers=params["n_layers"],
-        bidirectional=params["bidirectional"],
-        dropout=params["dropout"],
-        pad_idx=PAD_IDX,
-        nb_langs=len(LANGS),
-        lang_embeddding_dim=params['lang_embeddding_dim']
-    )
+                pad_idx=PAD_IDX,
+                output_dim=len(UD_TAGS.vocab),
+                nb_langs=len(LANGS),
+                bpe_input_dim=int(args.bpe_model.split('-')[1]),
+                char_rnn_input_dim=len(chartoi),
+                **params
+            )
 
     if args.mode == "train":
 
@@ -160,7 +167,7 @@ def main():
 
         model.apply(init_weights)
         print(f"The model has {count_parameters(model):,} trainable parameters")
-        model.embedding.weight.data[PAD_IDX] = torch.zeros(params["embedding_dim"])
+        # model.embedding.weight.data[PAD_IDX] = torch.zeros(params["embedding_dim"]) # TODO: Verify padding
         optimizer = optim.Adam(model.parameters())
 
     TAG_PAD_IDX = UD_TAGS.vocab.stoi[UD_TAGS.pad_token]
@@ -178,16 +185,21 @@ def main():
     model = model.to(device)
     criterion = criterion.to(device)
 
-    valid_iterator = {lang:lang_iterators[lang]['valid_iterator'] for lang in LANGS}
-    test_iterator = {lang:lang_iterators[lang]['test_iterator'] for lang in LANGS}
+    EPOCH_SAMPLES = 100000
+    train_iterator = POSIteratorML(
+        generators={lang:lang_iterators[lang]['train_iterator'] for lang in LANGS},
+        batch_size=params['batch_size'],
+        bpe_model=args.bpe_model,
+        langs=LANGS,
+        nb_samples=EPOCH_SAMPLES,
+        q_probs=LANG_INFOS['q-0.7'],     
+    )
+    valid_iterator = {lang:POSIterator(lang_iterators[lang]['valid_iterator'], bpe_model='ml-100000') for lang in LANGS}
+    test_iterator = {lang:POSIterator(lang_iterators[lang]['test_iterator'], bpe_model='ml-100000') for lang in LANGS}
 
     if args.mode == "train":
         N_EPOCHS = 10
-        EPOCH_SAMPLES = 100000
         best_valid_loss = float("inf")
-        for lang in LANGS:
-            lang_iterators[lang]['train_iterator'].init_epoch()
-        train_iterator = {lang:lang_iterators[lang]['train_iterator'].__iter__() for lang in LANGS}
         for epoch in range(N_EPOCHS):
             start_time = time.time()
             train_loss, train_acc = train(
@@ -293,19 +305,13 @@ def train(model, iterator, EPOCH_SAMPLES, optimizer, criterion, tag_pad_idx, tag
     # batch_lang_idx_dict = {LANGS[i]:torch.tensor([i]*params['batch_size'], requires_grad=False).cuda() for i in range(len(LANGS))}
 
     print(f'Begining training on {EPOCH_SAMPLES}')
-    for sample_nb in tqdm(range(0, EPOCH_SAMPLES, params['batch_size'])):
-        lang_idx = c.sample().item()
-        lang = LANGS[lang_idx]
-        batch = next(iterator[lang])
-
-        text = batch.text
-        tags = batch.udtags
-
+    for batch in iterator:
+        chars, bpes, bpes_mask, text, tags, lang_idx = batch
         optimizer.zero_grad()
 
-        batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(text.shape, lang_idx, requires_grad=False)
+        batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(tags.shape, lang_idx, requires_grad=False)
         # text = [sent len, batch size]
-        predictions = model(text, batch_lang_idx)
+        predictions = model(chars, bpes, bpes_mask, batch_lang_idx)
 
         # predictions = [sent len, batch size, output dim]
         # tags = [sent len, batch size]
@@ -357,12 +363,11 @@ def evaluate(model, iterator, criterion, tag_pad_idx, tag_unk_idx, inside_word_i
                 if batch_idx > len(iterator[lang]):
                     break
                 
-                text = batch.text
-                tags = batch.udtags
+                chars, bpes, bpes_mask, text, tags, lang_idx = batch
 
-                batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(text.shape, lang_idx, requires_grad=False)
+                batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(tags.shape, lang_idx, requires_grad=False)
 
-                predictions = model(text, batch_lang_idx)
+                predictions = model(chars, bpes, bpes_mask, batch_lang_idx)
 
                 predictions = predictions.view(-1, predictions.shape[-1])
                 tags = tags.view(-1)
