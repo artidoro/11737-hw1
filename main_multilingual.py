@@ -9,9 +9,10 @@ import sentencepiece as spm
 
 from torchtext import data
 from torchtext import datasets
+from device import device
 
 from model import BiLSTMPOSTagger
-from data_utils import POSIterator, POSIteratorML
+from data_utils import POSIteratorML
 
 import numpy as np
 from collections import Counter, defaultdict
@@ -21,14 +22,13 @@ import random
 import os, sys
 import argparse
 import json
-
 import warnings
 
 warnings.filterwarnings("ignore")
 
 INSIDE_WORD = 'INSIDE_WORD'
-# LANGS = ["en", "cs", "es", "ar", "hy", "lt", "af", "ta"]
-LANGS = ["af", "ta"]
+LANGS = ["en", "cs", "es", "ar", "hy", "lt", "af", "ta"]
+# LANGS = ["af", "ta"]
 LANG_INFOS = json.loads(open('lang_infos.json').read())
 # set command line options
 parser = argparse.ArgumentParser(description="main.py")
@@ -86,7 +86,7 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
-params = json.load(open("config-ml-debug.json"))
+params = json.load(open("config-ml.json"))
 
 def main():
     print("Running main.py in {} mode with lang: {}".format(args.mode, args.lang))
@@ -132,7 +132,6 @@ def main():
         for tag, count, percent in tag_percentage(UD_TAGS.vocab.freqs.most_common()):
             print(f"{tag}\t\t{count}\t\t{percent*100:4.1f}%")
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     lang_iterators = defaultdict(dict)
     for lang in LANGS:
         lang_iterators[lang]['train_iterator'], lang_iterators[lang]['valid_iterator'], lang_iterators[lang]['test_iterator'] = data.BucketIterator.splits(
@@ -151,8 +150,8 @@ def main():
                 pad_idx=PAD_IDX,
                 output_dim=len(UD_TAGS.vocab),
                 nb_langs=len(LANGS),
-                bpe_input_dim=int(args.bpe_model.split('-')[1]),
-                char_rnn_input_dim=len(chartoi),
+                bpe_input_dim=int(args.bpe_model.split('-')[1])+1,
+                char_rnn_input_dim=len(chartoi)+1,
                 **params
             )
 
@@ -185,23 +184,38 @@ def main():
     model = model.to(device)
     criterion = criterion.to(device)
 
-    EPOCH_SAMPLES = 100000
+    EPOCH_SAMPLES = params['nb_samples']
     train_iterator = POSIteratorML(
         generators={lang:lang_iterators[lang]['train_iterator'] for lang in LANGS},
         batch_size=params['batch_size'],
         bpe_model=args.bpe_model,
         langs=LANGS,
         nb_samples=EPOCH_SAMPLES,
-        q_probs=LANG_INFOS['q-0.7'],     
+        q_probs=LANG_INFOS['q-0.7'],
+        pad_idx_char_rnn=len(chartoi), 
+        pad_idx_bpe=int(args.bpe_model.split('-')[1])     
     )
-    valid_iterator = {lang:POSIterator(lang_iterators[lang]['valid_iterator'], bpe_model='ml-100000') for lang in LANGS}
-    test_iterator = {lang:POSIterator(lang_iterators[lang]['test_iterator'], bpe_model='ml-100000') for lang in LANGS}
+    valid_iterator = {lang: POSIteratorML(
+            lang_iterators[lang]['valid_iterator'],
+            batch_size=params['batch_size'],
+            bpe_model='ml-100000',
+            pad_idx_char_rnn=len(chartoi),
+            pad_idx_bpe=int(args.bpe_model.split('-')[1])
+        ) for lang in LANGS}
+    test_iterator = {lang: POSIteratorML(
+            lang_iterators[lang]['test_iterator'],
+            batch_size=params['batch_size'],
+            bpe_model='ml-100000',
+            pad_idx_char_rnn=len(chartoi),
+            pad_idx_bpe=int(args.bpe_model.split('-')[1])
+        ) for lang in LANGS}
 
     if args.mode == "train":
         N_EPOCHS = 10
         best_valid_loss = float("inf")
         for epoch in range(N_EPOCHS):
             start_time = time.time()
+            train_iterator.init_epoch()
             train_loss, train_acc = train(
                 model,
                 train_iterator,
@@ -305,14 +319,14 @@ def train(model, iterator, EPOCH_SAMPLES, optimizer, criterion, tag_pad_idx, tag
     # batch_lang_idx_dict = {LANGS[i]:torch.tensor([i]*params['batch_size'], requires_grad=False).cuda() for i in range(len(LANGS))}
 
     print(f'Begining training on {EPOCH_SAMPLES}')
-    for batch in iterator:
-        chars, bpes, bpes_mask, text, tags, lang_idx = batch
+    for batch in tqdm(iterator):
+        chars, chars_len, bpes, bpe_len, bpes_mask, text, tags, lang_idx = batch
         optimizer.zero_grad()
 
-        batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(tags.shape, lang_idx, requires_grad=False)
         # text = [sent len, batch size]
-        predictions = model(chars, bpes, bpes_mask, batch_lang_idx)
-
+        # start = time.time()
+        predictions = model(text, chars, chars_len, bpes, bpe_len, bpes_mask, lang_idx)
+        # print('forward:', time.time()-start)
         # predictions = [sent len, batch size, output dim]
         # tags = [sent len, batch size]
 
@@ -336,8 +350,10 @@ def train(model, iterator, EPOCH_SAMPLES, optimizer, criterion, tag_pad_idx, tag
             predictions, tags, tag_pad_idx, tag_unk_idx, inside_word_idx
         )
 
+        # start = time.time()
         loss.backward()
         optimizer.step()
+        # print('backward:', time.time()-start)
 
         epoch_loss += loss.item()
         epoch_correct += correct.item()
@@ -359,15 +375,14 @@ def evaluate(model, iterator, criterion, tag_pad_idx, tag_unk_idx, inside_word_i
     recall_denomin_counter = Counter()
     with torch.no_grad():
         for lang_idx, lang in tqdm(enumerate(LANGS)):
+            iterator[lang].init_epoch()
             for batch_idx, batch in enumerate(iterator[lang]):
                 if batch_idx > len(iterator[lang]):
                     break
                 
-                chars, bpes, bpes_mask, text, tags, lang_idx = batch
+                chars, chars_len, bpes, bpe_len, bpes_mask, text, tags, _ = batch
 
-                batch_lang_idx = torch.tensor((), dtype=torch.long, device='cuda').new_full(tags.shape, lang_idx, requires_grad=False)
-
-                predictions = model(chars, bpes, bpes_mask, batch_lang_idx)
+                predictions = model(text, chars, chars_len, bpes, bpe_len, bpes_mask, lang_idx)
 
                 predictions = predictions.view(-1, predictions.shape[-1])
                 tags = tags.view(-1)
