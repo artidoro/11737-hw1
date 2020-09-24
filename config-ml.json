@@ -8,7 +8,7 @@
     "lang_embeddding_dim": 20,
     "bpe_embedding_dim":100,
     "bpe_hidden_dim":128,
-    "bpe_n_layers":2,
+    "bpe_n_layers":4,
     "bpe_bidirectional":true,
     "char_rnn_embedding_dim":32,
     "char_rnn_hidden_dim":32,

@@ -219,7 +219,6 @@ import os
 from tqdm import tqdm
 from bpemb import BPEmb
 
-
 langs = [elt  for elt in os.listdir('data') if elt != 'ml']
 ext = ['sm', 'md', 'lg']
 inside_word_token = 'INSIDE_WORD'
@@ -259,4 +258,12 @@ for size, vocab_size in zip(['sm', 'md', 'lg'], [100000, 320000, 1000000]):
                                 else:
                                     out_file.write(f'{token}\t{inside_word_token}\n')
 
+# %%
+
+# %%
+from bpemb import BPEmb
+b = BPEmb(lang="multi", vs=100000, dim=300)
+
+# %%
+b.emb.vocab.keys()
 # %%

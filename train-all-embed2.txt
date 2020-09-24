@@ -1,0 +1,554 @@
+Running main.py in train mode with lang: af
+Unique tokens in TEXT vocabulary: 2924
+Unique tokens in UD_TAG vocabulary: 19
+
+Number of training examples: 1315
+Number of validation examples: 194
+Number of tokens in the training set: 41749
+Number of testing examples: 425
+Tag		Count		Percentage
+
+INSIDE_WORD		7855		18.8%
+NOUN		7335		17.6%
+ADP		4365		10.5%
+DET		3769		 9.0%
+PUNCT		3129		 7.5%
+VERB		2957		 7.1%
+PRON		2495		 6.0%
+AUX		2276		 5.5%
+ADJ		2168		 5.2%
+CCONJ		1327		 3.2%
+ADV		1295		 3.1%
+PART		926		 2.2%
+SCONJ		716		 1.7%
+PROPN		359		 0.9%
+SYM		323		 0.8%
+X		291		 0.7%
+NUM		163		 0.4%
+The model has 2,508,195 trainable parameters
+Epoch: 01 | Epoch Time: 0m 1s
+	Train Loss: 2.666 | Train Acc: 18.60%
+	 Val. Loss: 2.485 |  Val. Acc: 20.67%
+Epoch: 02 | Epoch Time: 0m 1s
+	Train Loss: 2.406 | Train Acc: 21.67%
+	 Val. Loss: 2.372 |  Val. Acc: 22.96%
+Epoch: 03 | Epoch Time: 0m 1s
+	Train Loss: 2.265 | Train Acc: 26.12%
+	 Val. Loss: 2.186 |  Val. Acc: 29.06%
+Epoch: 04 | Epoch Time: 0m 1s
+	Train Loss: 2.023 | Train Acc: 35.20%
+	 Val. Loss: 1.870 |  Val. Acc: 41.96%
+Epoch: 05 | Epoch Time: 0m 1s
+	Train Loss: 1.660 | Train Acc: 48.10%
+	 Val. Loss: 1.525 |  Val. Acc: 54.92%
+Epoch: 06 | Epoch Time: 0m 1s
+	Train Loss: 1.349 | Train Acc: 58.47%
+	 Val. Loss: 1.253 |  Val. Acc: 61.56%
+Epoch: 07 | Epoch Time: 0m 1s
+	Train Loss: 1.105 | Train Acc: 66.45%
+	 Val. Loss: 1.044 |  Val. Acc: 68.50%
+Epoch: 08 | Epoch Time: 0m 1s
+	Train Loss: 0.900 | Train Acc: 73.61%
+	 Val. Loss: 0.848 |  Val. Acc: 75.12%
+Epoch: 09 | Epoch Time: 0m 1s
+	Train Loss: 0.717 | Train Acc: 79.18%
+	 Val. Loss: 0.694 |  Val. Acc: 79.44%
+Epoch: 10 | Epoch Time: 0m 1s
+	Train Loss: 0.581 | Train Acc: 83.31%
+	 Val. Loss: 0.589 |  Val. Acc: 84.20%
+Epoch: 11 | Epoch Time: 0m 1s
+	Train Loss: 0.482 | Train Acc: 87.06%
+	 Val. Loss: 0.525 |  Val. Acc: 86.31%
+Epoch: 12 | Epoch Time: 0m 1s
+	Train Loss: 0.411 | Train Acc: 89.46%
+	 Val. Loss: 0.464 |  Val. Acc: 88.08%
+Epoch: 13 | Epoch Time: 0m 1s
+	Train Loss: 0.355 | Train Acc: 91.08%
+	 Val. Loss: 0.423 |  Val. Acc: 88.83%
+Epoch: 14 | Epoch Time: 0m 1s
+	Train Loss: 0.308 | Train Acc: 92.18%
+	 Val. Loss: 0.398 |  Val. Acc: 89.41%
+Epoch: 15 | Epoch Time: 0m 1s
+	Train Loss: 0.274 | Train Acc: 92.91%
+	 Val. Loss: 0.388 |  Val. Acc: 89.35%
+Epoch: 16 | Epoch Time: 0m 1s
+	Train Loss: 0.247 | Train Acc: 93.36%
+	 Val. Loss: 0.378 |  Val. Acc: 89.83%
+Epoch: 17 | Epoch Time: 0m 1s
+	Train Loss: 0.227 | Train Acc: 93.96%
+	 Val. Loss: 0.361 |  Val. Acc: 90.35%
+Epoch: 18 | Epoch Time: 0m 1s
+	Train Loss: 0.211 | Train Acc: 94.42%
+	 Val. Loss: 0.367 |  Val. Acc: 90.46%
+Epoch: 19 | Epoch Time: 0m 1s
+	Train Loss: 0.199 | Train Acc: 94.71%
+	 Val. Loss: 0.357 |  Val. Acc: 90.90%
+Epoch: 20 | Epoch Time: 0m 1s
+	Train Loss: 0.181 | Train Acc: 95.05%
+	 Val. Loss: 0.340 |  Val. Acc: 91.16%
+Epoch: 21 | Epoch Time: 0m 1s
+	Train Loss: 0.170 | Train Acc: 95.48%
+	 Val. Loss: 0.344 |  Val. Acc: 91.09%
+Epoch: 22 | Epoch Time: 0m 1s
+	Train Loss: 0.160 | Train Acc: 95.88%
+	 Val. Loss: 0.325 |  Val. Acc: 91.20%
+Epoch: 23 | Epoch Time: 0m 1s
+	Train Loss: 0.149 | Train Acc: 95.99%
+	 Val. Loss: 0.324 |  Val. Acc: 91.71%
+Epoch: 24 | Epoch Time: 0m 1s
+	Train Loss: 0.140 | Train Acc: 96.43%
+	 Val. Loss: 0.328 |  Val. Acc: 91.71%
+Epoch: 25 | Epoch Time: 0m 1s
+	Train Loss: 0.130 | Train Acc: 96.52%
+	 Val. Loss: 0.323 |  Val. Acc: 91.86%
+Epoch: 26 | Epoch Time: 0m 1s
+	Train Loss: 0.124 | Train Acc: 96.73%
+	 Val. Loss: 0.327 |  Val. Acc: 91.24%
+Epoch: 27 | Epoch Time: 0m 1s
+	Train Loss: 0.115 | Train Acc: 96.92%
+	 Val. Loss: 0.320 |  Val. Acc: 91.88%
+Epoch: 28 | Epoch Time: 0m 1s
+	Train Loss: 0.109 | Train Acc: 97.18%
+	 Val. Loss: 0.338 |  Val. Acc: 91.95%
+Epoch: 29 | Epoch Time: 0m 1s
+	Train Loss: 0.103 | Train Acc: 97.34%
+	 Val. Loss: 0.335 |  Val. Acc: 91.76%
+Epoch: 30 | Epoch Time: 0m 1s
+	Train Loss: 0.097 | Train Acc: 97.36%
+	 Val. Loss: 0.333 |  Val. Acc: 91.71%
+1.2049205899238586 4 9292.0 10065 {'DET': 0.9920634920634921, 'NOUN': 0.8742990654205608, 'ADP': 0.9659090909090909, 'INSIDE_WORD': -0.01, 'ADJ': 0.8314049586776859, 'AUX': 0.9478260869565217, 'NUM': 0.7619047619047619, 'PART': 0.9815950920245399, 'VERB': 0.8993939393939394, 'PRON': 0.9923761118170267, 'PUNCT': 0.9977246871444824, 'CCONJ': 0.984375, 'SCONJ': 0.9712918660287081, 'ADV': 0.8138075313807531, 'X': 0.6, 'PROPN': 0.5645161290322581, 'SYM': 0.9574468085106383} {'DET': 0.9861932938856016, 'NOUN': 0.9239506172839507, 'ADP': 0.9815242494226328, 'INSIDE_WORD': -0.01, 'ADJ': 0.7563909774436091, 'AUX': 0.9864253393665159, 'NUM': 0.7619047619047619, 'PART': 0.9937888198757764, 'VERB': 0.8346456692913385, 'PRON': 0.9836272040302267, 'PUNCT': 1.0, 'CCONJ': 0.9947368421052631, 'SCONJ': 0.9666666666666667, 'ADV': 0.7437858508604207, 'X': 0.421875, 'PROPN': 0.6730769230769231, 'SYM': 0.9507042253521126} {'DET': 0.9891196834817012, 'NOUN': 0.8984393757503003, 'ADP': 0.9736540664375716, 'INSIDE_WORD': -0.01, 'ADJ': 0.7921259842519686, 'AUX': 0.9667405764966741, 'NUM': 0.7619047619047619, 'PART': 0.9876543209876544, 'VERB': 0.8658109684947491, 'PRON': 0.9879822896900695, 'PUNCT': 0.9988610478359908, 'CCONJ': 0.9895287958115183, 'SCONJ': 0.9689737470167064, 'ADV': 0.7772227772227772, 'X': 0.49541284403669716, 'PROPN': 0.6140350877192983, 'SYM': 0.9540636042402827} Counter({'NOUN': 2025.0, 'ADP': 1299.0, 'DET': 1014.0, 'VERB': 889.0, 'PUNCT': 877.0, 'PRON': 794.0, 'ADJ': 665.0, 'AUX': 663.0, 'ADV': 523.0, 'CCONJ': 380.0, 'PART': 322.0, 'SCONJ': 210.0, 'PROPN': 156.0, 'SYM': 142.0, 'X': 64.0, 'NUM': 42.0})
+Test Loss: 0.301 |  Test Acc: 92.32%
+Number of tokens in the training set: 41749
+Tag		Count		Percent		P		R	  	F1
+
+NOUN		2025.0		20.1%		87.4%		92.4%		89.8%
+ADP		1299.0		12.9%		96.6%		98.2%		97.4%
+DET		1014.0		10.1%		99.2%		98.6%		98.9%
+VERB		889.0		 8.8%		89.9%		83.5%		86.6%
+PUNCT		877.0		 8.7%		99.8%		100.0%		99.9%
+PRON		794.0		 7.9%		99.2%		98.4%		98.8%
+ADJ		665.0		 6.6%		83.1%		75.6%		79.2%
+AUX		663.0		 6.6%		94.8%		98.6%		96.7%
+ADV		523.0		 5.2%		81.4%		74.4%		77.7%
+CCONJ		380.0		 3.8%		98.4%		99.5%		99.0%
+PART		322.0		 3.2%		98.2%		99.4%		98.8%
+SCONJ		210.0		 2.1%		97.1%		96.7%		96.9%
+PROPN		156.0		 1.5%		56.5%		67.3%		61.4%
+SYM		142.0		 1.4%		95.7%		95.1%		95.4%
+X		64.0		 0.6%		60.0%		42.2%		49.5%
+NUM		42.0		 0.4%		76.2%		76.2%		76.2%
+Running main.py in train mode with lang: lt
+Unique tokens in TEXT vocabulary: 5951
+Unique tokens in UD_TAG vocabulary: 20
+
+Number of training examples: 2341
+Number of validation examples: 617
+Number of tokens in the training set: 63758
+Number of testing examples: 684
+Tag		Count		Percentage
+
+INSIDE_WORD		16153		25.3%
+NOUN		14933		23.4%
+PUNCT		8756		13.7%
+VERB		6604		10.4%
+ADJ		3274		 5.1%
+CCONJ		2136		 3.4%
+ADV		1826		 2.9%
+PRON		1688		 2.6%
+ADP		1490		 2.3%
+NUM		1312		 2.1%
+DET		1181		 1.9%
+X		1066		 1.7%
+PROPN		983		 1.5%
+PART		951		 1.5%
+SCONJ		917		 1.4%
+AUX		453		 0.7%
+SYM		26		 0.0%
+INTJ		9		 0.0%
+The model has 3,416,552 trainable parameters
+Epoch: 01 | Epoch Time: 0m 4s
+	Train Loss: 2.434 | Train Acc: 28.89%
+	 Val. Loss: 2.227 |  Val. Acc: 30.57%
+Epoch: 02 | Epoch Time: 0m 4s
+	Train Loss: 2.191 | Train Acc: 31.13%
+	 Val. Loss: 2.190 |  Val. Acc: 30.68%
+Epoch: 03 | Epoch Time: 0m 3s
+	Train Loss: 2.022 | Train Acc: 41.17%
+	 Val. Loss: 1.791 |  Val. Acc: 48.46%
+Epoch: 04 | Epoch Time: 0m 3s
+	Train Loss: 1.636 | Train Acc: 50.72%
+	 Val. Loss: 1.529 |  Val. Acc: 51.14%
+Epoch: 05 | Epoch Time: 0m 4s
+	Train Loss: 1.312 | Train Acc: 58.52%
+	 Val. Loss: 1.245 |  Val. Acc: 61.31%
+Epoch: 06 | Epoch Time: 0m 3s
+	Train Loss: 1.053 | Train Acc: 66.22%
+	 Val. Loss: 1.102 |  Val. Acc: 64.35%
+Epoch: 07 | Epoch Time: 0m 4s
+	Train Loss: 0.898 | Train Acc: 70.74%
+	 Val. Loss: 0.999 |  Val. Acc: 68.93%
+Epoch: 08 | Epoch Time: 0m 4s
+	Train Loss: 0.792 | Train Acc: 74.81%
+	 Val. Loss: 0.941 |  Val. Acc: 70.37%
+Epoch: 09 | Epoch Time: 0m 4s
+	Train Loss: 0.722 | Train Acc: 77.23%
+	 Val. Loss: 0.902 |  Val. Acc: 71.77%
+Epoch: 10 | Epoch Time: 0m 3s
+	Train Loss: 0.656 | Train Acc: 79.25%
+	 Val. Loss: 0.848 |  Val. Acc: 73.22%
+Epoch: 11 | Epoch Time: 0m 4s
+	Train Loss: 0.596 | Train Acc: 81.27%
+	 Val. Loss: 0.817 |  Val. Acc: 74.95%
+Epoch: 12 | Epoch Time: 0m 3s
+	Train Loss: 0.539 | Train Acc: 83.22%
+	 Val. Loss: 0.782 |  Val. Acc: 76.02%
+Epoch: 13 | Epoch Time: 0m 3s
+	Train Loss: 0.488 | Train Acc: 85.03%
+	 Val. Loss: 0.735 |  Val. Acc: 78.17%
+Epoch: 14 | Epoch Time: 0m 3s
+	Train Loss: 0.453 | Train Acc: 86.35%
+	 Val. Loss: 0.717 |  Val. Acc: 78.98%
+Epoch: 15 | Epoch Time: 0m 3s
+	Train Loss: 0.408 | Train Acc: 87.88%
+	 Val. Loss: 0.685 |  Val. Acc: 79.51%
+Epoch: 16 | Epoch Time: 0m 4s
+	Train Loss: 0.369 | Train Acc: 88.98%
+	 Val. Loss: 0.656 |  Val. Acc: 80.94%
+Epoch: 17 | Epoch Time: 0m 4s
+	Train Loss: 0.340 | Train Acc: 90.04%
+	 Val. Loss: 0.644 |  Val. Acc: 81.39%
+Epoch: 18 | Epoch Time: 0m 3s
+	Train Loss: 0.318 | Train Acc: 90.72%
+	 Val. Loss: 0.637 |  Val. Acc: 81.75%
+Epoch: 19 | Epoch Time: 0m 3s
+	Train Loss: 0.294 | Train Acc: 91.54%
+	 Val. Loss: 0.641 |  Val. Acc: 82.14%
+Epoch: 20 | Epoch Time: 0m 3s
+	Train Loss: 0.269 | Train Acc: 92.20%
+	 Val. Loss: 0.621 |  Val. Acc: 83.24%
+Epoch: 21 | Epoch Time: 0m 2s
+	Train Loss: 0.253 | Train Acc: 92.88%
+	 Val. Loss: 0.633 |  Val. Acc: 83.38%
+Epoch: 22 | Epoch Time: 0m 2s
+	Train Loss: 0.239 | Train Acc: 93.40%
+	 Val. Loss: 0.627 |  Val. Acc: 82.63%
+Epoch: 23 | Epoch Time: 0m 2s
+	Train Loss: 0.221 | Train Acc: 93.86%
+	 Val. Loss: 0.624 |  Val. Acc: 83.30%
+Epoch: 24 | Epoch Time: 0m 2s
+	Train Loss: 0.205 | Train Acc: 94.18%
+	 Val. Loss: 0.628 |  Val. Acc: 83.89%
+Epoch: 25 | Epoch Time: 0m 2s
+	Train Loss: 0.195 | Train Acc: 94.54%
+	 Val. Loss: 0.620 |  Val. Acc: 83.50%
+Epoch: 26 | Epoch Time: 0m 2s
+	Train Loss: 0.182 | Train Acc: 95.02%
+	 Val. Loss: 0.626 |  Val. Acc: 84.00%
+Epoch: 27 | Epoch Time: 0m 3s
+	Train Loss: 0.172 | Train Acc: 95.34%
+	 Val. Loss: 0.631 |  Val. Acc: 84.08%
+Epoch: 28 | Epoch Time: 0m 4s
+	Train Loss: 0.165 | Train Acc: 95.44%
+	 Val. Loss: 0.615 |  Val. Acc: 84.57%
+Epoch: 29 | Epoch Time: 0m 4s
+	Train Loss: 0.157 | Train Acc: 95.73%
+	 Val. Loss: 0.621 |  Val. Acc: 84.19%
+Epoch: 30 | Epoch Time: 0m 4s
+	Train Loss: 0.147 | Train Acc: 95.96%
+	 Val. Loss: 0.630 |  Val. Acc: 84.28%
+4.558370411396027 6 8802.0 10846 {'VERB': 0.7934093789607097, 'INSIDE_WORD': -0.01, 'ADJ': 0.4802342606149341, 'NOUN': 0.8016614745586709, 'CCONJ': 0.9032258064516129, 'PUNCT': 1.0, 'PRON': 0.907725321888412, 'DET': 0.8045602605863192, 'X': 0.5138888888888888, 'ADP': 0.8467908902691511, 'PROPN': 0.2916666666666667, 'AUX': 0.7398373983739838, 'ADV': 0.7811860940695297, 'SCONJ': 0.9370629370629371, 'PART': 0.7830188679245284, 'NUM': 0.9084507042253521, 'INTJ': -0.01, 'SYM': -0.01} {'VERB': 0.6886688668866887, 'INSIDE_WORD': -0.01, 'ADJ': 0.5385878489326765, 'NOUN': 0.8241992882562278, 'CCONJ': 0.9451476793248945, 'PUNCT': 0.9995143273433705, 'PRON': 0.9441964285714286, 'DET': 0.8576388888888888, 'X': 0.676829268292683, 'ADP': 0.9316628701594533, 'PROPN': 0.37142857142857144, 'AUX': 0.8921568627450981, 'ADV': 0.6701754385964912, 'SCONJ': 0.9605734767025089, 'PART': 0.699438202247191, 'NUM': 0.7633136094674556, 'INTJ': 0.0, 'SYM': 0.0} {'VERB': 0.7373380447585395, 'INSIDE_WORD': -0.01, 'ADJ': 0.5077399380804953, 'NOUN': 0.8127741709071766, 'CCONJ': 0.9237113402061855, 'PUNCT': 0.9997571046878795, 'PRON': 0.9256017505470461, 'DET': 0.8302521008403361, 'X': 0.5842105263157895, 'ADP': 0.8872017353579176, 'PROPN': 0.32675044883303406, 'AUX': 0.8088888888888889, 'ADV': 0.7214353163361661, 'SCONJ': 0.9486725663716814, 'PART': 0.738872403560831, 'NUM': 0.8295819935691319, 'INTJ': -0.01, 'SYM': -0.01} Counter({'NOUN': 2810.0, 'PUNCT': 2059.0, 'VERB': 1818.0, 'ADJ': 609.0, 'ADV': 570.0, 'CCONJ': 474.0, 'PRON': 448.0, 'ADP': 439.0, 'PART': 356.0, 'DET': 288.0, 'SCONJ': 279.0, 'PROPN': 245.0, 'NUM': 169.0, 'X': 164.0, 'AUX': 102.0, 'INTJ': 8.0, 'SYM': 8.0})
+Test Loss: 0.760 |  Test Acc: 81.15%
+Number of tokens in the training set: 63758
+Tag		Count		Percent		P		R	  	F1
+
+NOUN		2810.0		25.9%		80.2%		82.4%		81.3%
+PUNCT		2059.0		19.0%		100.0%		100.0%		100.0%
+VERB		1818.0		16.8%		79.3%		68.9%		73.7%
+ADJ		609.0		 5.6%		48.0%		53.9%		50.8%
+ADV		570.0		 5.3%		78.1%		67.0%		72.1%
+CCONJ		474.0		 4.4%		90.3%		94.5%		92.4%
+PRON		448.0		 4.1%		90.8%		94.4%		92.6%
+ADP		439.0		 4.0%		84.7%		93.2%		88.7%
+PART		356.0		 3.3%		78.3%		69.9%		73.9%
+DET		288.0		 2.7%		80.5%		85.8%		83.0%
+SCONJ		279.0		 2.6%		93.7%		96.1%		94.9%
+PROPN		245.0		 2.3%		29.2%		37.1%		32.7%
+NUM		169.0		 1.6%		90.8%		76.3%		83.0%
+X		164.0		 1.5%		51.4%		67.7%		58.4%
+AUX		102.0		 0.9%		74.0%		89.2%		80.9%
+INTJ		8.0		 0.1%		-1.0%		 0.0%		-1.0%
+SYM		8.0		 0.1%		-1.0%		 0.0%		-1.0%
+Running main.py in train mode with lang: hy
+Unique tokens in TEXT vocabulary: 4622
+Unique tokens in UD_TAG vocabulary: 20
+
+Number of training examples: 1975
+Number of validation examples: 249
+Number of tokens in the training set: 56653
+Number of testing examples: 278
+Tag		Count		Percentage
+
+INSIDE_WORD		14548		25.7%
+NOUN		10524		18.6%
+PUNCT		8124		14.3%
+VERB		5355		 9.5%
+ADJ		3317		 5.9%
+AUX		2963		 5.2%
+CCONJ		1905		 3.4%
+ADV		1843		 3.3%
+PRON		1636		 2.9%
+DET		1609		 2.8%
+PROPN		1499		 2.6%
+ADP		1301		 2.3%
+SCONJ		745		 1.3%
+NUM		540		 1.0%
+PART		458		 0.8%
+X		153		 0.3%
+INTJ		105		 0.2%
+SYM		28		 0.0%
+The model has 3,017,852 trainable parameters
+Epoch: 01 | Epoch Time: 0m 3s
+	Train Loss: 2.521 | Train Acc: 23.06%
+	 Val. Loss: 2.275 |  Val. Acc: 27.86%
+Epoch: 02 | Epoch Time: 0m 3s
+	Train Loss: 2.296 | Train Acc: 24.48%
+	 Val. Loss: 2.240 |  Val. Acc: 28.87%
+Epoch: 03 | Epoch Time: 0m 3s
+	Train Loss: 2.215 | Train Acc: 31.64%
+	 Val. Loss: 2.021 |  Val. Acc: 40.88%
+Epoch: 04 | Epoch Time: 0m 3s
+	Train Loss: 1.899 | Train Acc: 42.54%
+	 Val. Loss: 1.746 |  Val. Acc: 45.55%
+Epoch: 05 | Epoch Time: 0m 3s
+	Train Loss: 1.717 | Train Acc: 45.43%
+	 Val. Loss: 1.607 |  Val. Acc: 50.63%
+Epoch: 06 | Epoch Time: 0m 3s
+	Train Loss: 1.521 | Train Acc: 52.49%
+	 Val. Loss: 1.368 |  Val. Acc: 58.03%
+Epoch: 07 | Epoch Time: 0m 3s
+	Train Loss: 1.282 | Train Acc: 59.59%
+	 Val. Loss: 1.186 |  Val. Acc: 62.62%
+Epoch: 08 | Epoch Time: 0m 3s
+	Train Loss: 1.117 | Train Acc: 64.03%
+	 Val. Loss: 1.059 |  Val. Acc: 66.19%
+Epoch: 09 | Epoch Time: 0m 3s
+	Train Loss: 0.985 | Train Acc: 68.97%
+	 Val. Loss: 0.939 |  Val. Acc: 72.66%
+Epoch: 10 | Epoch Time: 0m 3s
+	Train Loss: 0.864 | Train Acc: 73.33%
+	 Val. Loss: 0.852 |  Val. Acc: 74.64%
+Epoch: 11 | Epoch Time: 0m 3s
+	Train Loss: 0.750 | Train Acc: 77.41%
+	 Val. Loss: 0.730 |  Val. Acc: 79.06%
+Epoch: 12 | Epoch Time: 0m 3s
+	Train Loss: 0.656 | Train Acc: 80.84%
+	 Val. Loss: 0.660 |  Val. Acc: 81.53%
+Epoch: 13 | Epoch Time: 0m 3s
+	Train Loss: 0.589 | Train Acc: 83.50%
+	 Val. Loss: 0.620 |  Val. Acc: 82.22%
+Epoch: 14 | Epoch Time: 0m 3s
+	Train Loss: 0.530 | Train Acc: 85.26%
+	 Val. Loss: 0.594 |  Val. Acc: 82.48%
+Epoch: 15 | Epoch Time: 0m 3s
+	Train Loss: 0.489 | Train Acc: 86.47%
+	 Val. Loss: 0.553 |  Val. Acc: 84.27%
+Epoch: 16 | Epoch Time: 0m 3s
+	Train Loss: 0.451 | Train Acc: 87.49%
+	 Val. Loss: 0.528 |  Val. Acc: 84.98%
+Epoch: 17 | Epoch Time: 0m 3s
+	Train Loss: 0.416 | Train Acc: 88.37%
+	 Val. Loss: 0.508 |  Val. Acc: 85.76%
+Epoch: 18 | Epoch Time: 0m 3s
+	Train Loss: 0.388 | Train Acc: 89.23%
+	 Val. Loss: 0.493 |  Val. Acc: 85.99%
+Epoch: 19 | Epoch Time: 0m 3s
+	Train Loss: 0.366 | Train Acc: 89.68%
+	 Val. Loss: 0.490 |  Val. Acc: 86.12%
+Epoch: 20 | Epoch Time: 0m 3s
+	Train Loss: 0.347 | Train Acc: 90.38%
+	 Val. Loss: 0.478 |  Val. Acc: 86.47%
+Epoch: 21 | Epoch Time: 0m 3s
+	Train Loss: 0.329 | Train Acc: 90.78%
+	 Val. Loss: 0.468 |  Val. Acc: 86.86%
+Epoch: 22 | Epoch Time: 0m 3s
+	Train Loss: 0.313 | Train Acc: 91.12%
+	 Val. Loss: 0.455 |  Val. Acc: 87.40%
+Epoch: 23 | Epoch Time: 0m 3s
+	Train Loss: 0.296 | Train Acc: 91.62%
+	 Val. Loss: 0.448 |  Val. Acc: 87.65%
+Epoch: 24 | Epoch Time: 0m 3s
+	Train Loss: 0.282 | Train Acc: 91.94%
+	 Val. Loss: 0.468 |  Val. Acc: 87.03%
+Epoch: 25 | Epoch Time: 0m 3s
+	Train Loss: 0.271 | Train Acc: 92.18%
+	 Val. Loss: 0.450 |  Val. Acc: 87.65%
+Epoch: 26 | Epoch Time: 0m 3s
+	Train Loss: 0.253 | Train Acc: 92.67%
+	 Val. Loss: 0.433 |  Val. Acc: 87.65%
+Epoch: 27 | Epoch Time: 0m 3s
+	Train Loss: 0.248 | Train Acc: 92.94%
+	 Val. Loss: 0.444 |  Val. Acc: 88.08%
+Epoch: 28 | Epoch Time: 0m 3s
+	Train Loss: 0.236 | Train Acc: 93.30%
+	 Val. Loss: 0.433 |  Val. Acc: 88.00%
+Epoch: 29 | Epoch Time: 0m 3s
+	Train Loss: 0.224 | Train Acc: 93.53%
+	 Val. Loss: 0.442 |  Val. Acc: 87.72%
+Epoch: 30 | Epoch Time: 0m 3s
+	Train Loss: 0.211 | Train Acc: 93.95%
+	 Val. Loss: 0.450 |  Val. Acc: 88.00%
+1.5855993628501892 3 4383.0 5166 {'VERB': 0.8550295857988166, 'AUX': 0.9694444444444444, 'PUNCT': 0.9990859232175503, 'PROPN': 0.5144508670520231, 'INSIDE_WORD': -0.01, 'CCONJ': 0.9777777777777777, 'NOUN': 0.8025034770514604, 'ADJ': 0.7196969696969697, 'DET': 0.8136645962732919, 'ADV': 0.7264957264957265, 'SCONJ': 0.6966292134831461, 'PRON': 0.8153846153846154, 'PART': 0.5161290322580645, 'ADP': 0.9, 'NUM': 0.9431818181818182, 'INTJ': 0.5555555555555556, 'X': 0.3333333333333333, 'SYM': -0.01} {'VERB': 0.834054834054834, 'AUX': 0.9803370786516854, 'PUNCT': 1.0, 'PROPN': 0.4587628865979381, 'INSIDE_WORD': -0.01, 'CCONJ': 0.9103448275862069, 'NOUN': 0.8709433962264151, 'ADJ': 0.6721698113207547, 'DET': 0.903448275862069, 'ADV': 0.6995884773662552, 'SCONJ': 0.8732394366197183, 'PRON': 0.9137931034482759, 'PART': 0.23880597014925373, 'ADP': 0.9, 'NUM': 0.8217821782178217, 'INTJ': 0.2631578947368421, 'X': 0.13793103448275862, 'SYM': 0.0} {'VERB': 0.8444119795471147, 'AUX': 0.9748603351955308, 'PUNCT': 0.9995427526291724, 'PROPN': 0.4850136239782017, 'INSIDE_WORD': -0.01, 'CCONJ': 0.9428571428571428, 'NOUN': 0.8353239232718062, 'ADJ': 0.6951219512195121, 'DET': 0.8562091503267973, 'ADV': 0.7127882599580714, 'SCONJ': 0.775, 'PRON': 0.8617886178861788, 'PART': 0.32653061224489793, 'ADP': 0.9, 'NUM': 0.8783068783068783, 'INTJ': 0.35714285714285715, 'X': 0.1951219512195122, 'SYM': -0.01} Counter({'NOUN': 1325.0, 'PUNCT': 1093.0, 'VERB': 693.0, 'ADJ': 424.0, 'AUX': 356.0, 'ADV': 243.0, 'PROPN': 194.0, 'CCONJ': 145.0, 'DET': 145.0, 'ADP': 140.0, 'PRON': 116.0, 'NUM': 101.0, 'SCONJ': 71.0, 'PART': 67.0, 'X': 29.0, 'INTJ': 19.0, 'SYM': 5.0})
+Test Loss: 0.529 |  Test Acc: 84.84%
+Number of tokens in the training set: 56653
+Tag		Count		Percent		P		R	  	F1
+
+NOUN		1325.0		25.6%		80.3%		87.1%		83.5%
+PUNCT		1093.0		21.2%		99.9%		100.0%		100.0%
+VERB		693.0		13.4%		85.5%		83.4%		84.4%
+ADJ		424.0		 8.2%		72.0%		67.2%		69.5%
+AUX		356.0		 6.9%		96.9%		98.0%		97.5%
+ADV		243.0		 4.7%		72.6%		70.0%		71.3%
+PROPN		194.0		 3.8%		51.4%		45.9%		48.5%
+CCONJ		145.0		 2.8%		97.8%		91.0%		94.3%
+DET		145.0		 2.8%		81.4%		90.3%		85.6%
+ADP		140.0		 2.7%		90.0%		90.0%		90.0%
+PRON		116.0		 2.2%		81.5%		91.4%		86.2%
+NUM		101.0		 2.0%		94.3%		82.2%		87.8%
+SCONJ		71.0		 1.4%		69.7%		87.3%		77.5%
+PART		67.0		 1.3%		51.6%		23.9%		32.7%
+X		29.0		 0.6%		33.3%		13.8%		19.5%
+INTJ		19.0		 0.4%		55.6%		26.3%		35.7%
+SYM		5.0		 0.1%		-1.0%		 0.0%		-1.0%
+Running main.py in train mode with lang: ta
+Unique tokens in TEXT vocabulary: 1411
+Unique tokens in UD_TAG vocabulary: 16
+
+Number of training examples: 400
+Number of validation examples: 80
+Number of tokens in the training set: 9534
+Number of testing examples: 120
+Tag		Count		Percentage
+
+INSIDE_WORD		3205		33.6%
+NOUN		1860		19.5%
+PROPN		936		 9.8%
+VERB		747		 7.8%
+PUNCT		665		 7.0%
+ADJ		466		 4.9%
+AUX		423		 4.4%
+PART		383		 4.0%
+ADV		251		 2.6%
+ADP		184		 1.9%
+NUM		156		 1.6%
+PRON		147		 1.5%
+DET		80		 0.8%
+CCONJ		31		 0.3%
+The model has 2,053,524 trainable parameters
+Epoch: 01 | Epoch Time: 0m 0s
+	Train Loss: 2.712 | Train Acc: 17.65%
+	 Val. Loss: 2.485 |  Val. Acc: 29.06%
+Epoch: 02 | Epoch Time: 0m 0s
+	Train Loss: 2.350 | Train Acc: 29.39%
+	 Val. Loss: 2.224 |  Val. Acc: 29.06%
+Epoch: 03 | Epoch Time: 0m 0s
+	Train Loss: 2.233 | Train Acc: 28.99%
+	 Val. Loss: 2.177 |  Val. Acc: 29.14%
+Epoch: 04 | Epoch Time: 0m 0s
+	Train Loss: 2.174 | Train Acc: 28.20%
+	 Val. Loss: 2.135 |  Val. Acc: 29.06%
+Epoch: 05 | Epoch Time: 0m 0s
+	Train Loss: 2.129 | Train Acc: 29.44%
+	 Val. Loss: 2.067 |  Val. Acc: 34.60%
+Epoch: 06 | Epoch Time: 0m 0s
+	Train Loss: 2.064 | Train Acc: 34.32%
+	 Val. Loss: 2.047 |  Val. Acc: 34.76%
+Epoch: 07 | Epoch Time: 0m 0s
+	Train Loss: 2.086 | Train Acc: 34.41%
+	 Val. Loss: 2.004 |  Val. Acc: 36.26%
+Epoch: 08 | Epoch Time: 0m 0s
+	Train Loss: 2.021 | Train Acc: 35.90%
+	 Val. Loss: 1.996 |  Val. Acc: 36.34%
+Epoch: 09 | Epoch Time: 0m 0s
+	Train Loss: 1.968 | Train Acc: 36.44%
+	 Val. Loss: 1.964 |  Val. Acc: 36.42%
+Epoch: 10 | Epoch Time: 0m 0s
+	Train Loss: 1.946 | Train Acc: 37.02%
+	 Val. Loss: 1.945 |  Val. Acc: 38.72%
+Epoch: 11 | Epoch Time: 0m 0s
+	Train Loss: 1.942 | Train Acc: 38.36%
+	 Val. Loss: 1.924 |  Val. Acc: 38.48%
+Epoch: 12 | Epoch Time: 0m 0s
+	Train Loss: 1.875 | Train Acc: 38.98%
+	 Val. Loss: 1.907 |  Val. Acc: 39.27%
+Epoch: 13 | Epoch Time: 0m 0s
+	Train Loss: 1.913 | Train Acc: 39.33%
+	 Val. Loss: 1.889 |  Val. Acc: 40.14%
+Epoch: 14 | Epoch Time: 0m 0s
+	Train Loss: 1.865 | Train Acc: 40.59%
+	 Val. Loss: 1.878 |  Val. Acc: 40.06%
+Epoch: 15 | Epoch Time: 0m 0s
+	Train Loss: 1.828 | Train Acc: 41.02%
+	 Val. Loss: 1.858 |  Val. Acc: 40.30%
+Epoch: 16 | Epoch Time: 0m 0s
+	Train Loss: 1.879 | Train Acc: 39.09%
+	 Val. Loss: 1.831 |  Val. Acc: 40.46%
+Epoch: 17 | Epoch Time: 0m 0s
+	Train Loss: 1.807 | Train Acc: 41.95%
+	 Val. Loss: 1.810 |  Val. Acc: 41.41%
+Epoch: 18 | Epoch Time: 0m 0s
+	Train Loss: 1.778 | Train Acc: 43.39%
+	 Val. Loss: 1.767 |  Val. Acc: 43.15%
+Epoch: 19 | Epoch Time: 0m 0s
+	Train Loss: 1.698 | Train Acc: 45.16%
+	 Val. Loss: 1.700 |  Val. Acc: 44.97%
+Epoch: 20 | Epoch Time: 0m 0s
+	Train Loss: 1.645 | Train Acc: 47.45%
+	 Val. Loss: 1.650 |  Val. Acc: 46.79%
+Epoch: 21 | Epoch Time: 0m 0s
+	Train Loss: 1.628 | Train Acc: 48.93%
+	 Val. Loss: 1.581 |  Val. Acc: 49.49%
+Epoch: 22 | Epoch Time: 0m 0s
+	Train Loss: 1.511 | Train Acc: 50.85%
+	 Val. Loss: 1.544 |  Val. Acc: 50.04%
+Epoch: 23 | Epoch Time: 0m 0s
+	Train Loss: 1.452 | Train Acc: 51.97%
+	 Val. Loss: 1.501 |  Val. Acc: 50.75%
+Epoch: 24 | Epoch Time: 0m 0s
+	Train Loss: 1.405 | Train Acc: 53.91%
+	 Val. Loss: 1.449 |  Val. Acc: 53.29%
+Epoch: 25 | Epoch Time: 0m 0s
+	Train Loss: 1.357 | Train Acc: 56.53%
+	 Val. Loss: 1.426 |  Val. Acc: 54.71%
+Epoch: 26 | Epoch Time: 0m 0s
+	Train Loss: 1.291 | Train Acc: 57.83%
+	 Val. Loss: 1.354 |  Val. Acc: 57.48%
+Epoch: 27 | Epoch Time: 0m 0s
+	Train Loss: 1.249 | Train Acc: 59.24%
+	 Val. Loss: 1.333 |  Val. Acc: 57.80%
+Epoch: 28 | Epoch Time: 0m 0s
+	Train Loss: 1.208 | Train Acc: 60.36%
+	 Val. Loss: 1.314 |  Val. Acc: 57.72%
+Epoch: 29 | Epoch Time: 0m 0s
+	Train Loss: 1.130 | Train Acc: 61.43%
+	 Val. Loss: 1.290 |  Val. Acc: 59.07%
+Epoch: 30 | Epoch Time: 0m 0s
+	Train Loss: 1.144 | Train Acc: 62.58%
+	 Val. Loss: 1.268 |  Val. Acc: 58.12%
+1.3073679208755493 1 1154.0 1988 {'PROPN': 0.3643724696356275, 'ADP': 1.0, 'INSIDE_WORD': -0.01, 'PUNCT': 0.9842931937172775, 'ADJ': 0.17647058823529413, 'NOUN': 0.5359712230215827, 'PART': 0.5739130434782609, 'PRON': 0.0, 'VERB': 0.6488888888888888, 'AUX': 0.7125748502994012, 'ADV': 0.52, 'DET': -0.01, 'CCONJ': -0.01, 'NUM': 0.5625} {'PROPN': 0.3614457831325301, 'ADP': 0.015384615384615385, 'INSIDE_WORD': -0.01, 'PUNCT': 0.9894736842105263, 'ADJ': 0.06666666666666667, 'NOUN': 0.8498098859315589, 'PART': 0.7857142857142857, 'PRON': 0.0, 'VERB': 0.5509433962264151, 'AUX': 0.8206896551724138, 'ADV': 0.18055555555555555, 'DET': 0.0, 'CCONJ': 0.0, 'NUM': 0.12} {'PROPN': 0.3629032258064517, 'ADP': 0.030303030303030307, 'INSIDE_WORD': -0.01, 'PUNCT': 0.9868766404199475, 'ADJ': 0.09677419354838708, 'NOUN': 0.6573529411764706, 'PART': 0.6633165829145728, 'PRON': -0.01, 'VERB': 0.5959183673469387, 'AUX': 0.7628205128205128, 'ADV': 0.26804123711340205, 'DET': -0.01, 'CCONJ': -0.01, 'NUM': 0.19780219780219782} Counter({'NOUN': 526.0, 'VERB': 265.0, 'PROPN': 249.0, 'PUNCT': 190.0, 'PART': 168.0, 'AUX': 145.0, 'ADJ': 135.0, 'NUM': 75.0, 'ADV': 72.0, 'ADP': 65.0, 'PRON': 61.0, 'DET': 29.0, 'CCONJ': 8.0})
+Test Loss: 1.307 |  Test Acc: 58.05%
+Number of tokens in the training set: 9534
+Tag		Count		Percent		P		R	  	F1
+
+NOUN		526.0		26.5%		53.6%		85.0%		65.7%
+VERB		265.0		13.3%		64.9%		55.1%		59.6%
+PROPN		249.0		12.5%		36.4%		36.1%		36.3%
+PUNCT		190.0		 9.6%		98.4%		98.9%		98.7%
+PART		168.0		 8.5%		57.4%		78.6%		66.3%
+AUX		145.0		 7.3%		71.3%		82.1%		76.3%
+ADJ		135.0		 6.8%		17.6%		 6.7%		 9.7%
+NUM		75.0		 3.8%		56.2%		12.0%		19.8%
+ADV		72.0		 3.6%		52.0%		18.1%		26.8%
+ADP		65.0		 3.3%		100.0%		 1.5%		 3.0%
+PRON		61.0		 3.1%		 0.0%		 0.0%		-1.0%
+DET		29.0		 1.5%		-1.0%		 0.0%		-1.0%
+CCONJ		8.0		 0.4%		-1.0%		 0.0%		-1.0%

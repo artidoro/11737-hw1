@@ -127,12 +127,12 @@ class POSIteratorML:
             batch = next(self.iterator[lang])
         else:
             batch = next(self.iterator)
-        string_batch = self.itos_batch(batch) # Includes transpose
-        chars, chars_len = self.char_encode(string_batch)
-        bpes, bpe_len, bpes_mask = self.bpe_encode(string_batch)
-        chars, bpes, bpes_mask = chars.transpose(0,1), bpes.transpose(0,1), bpes_mask.transpose(0,1)
+        # string_batch = self.itos_batch(batch) # Includes transpose
+        # chars, chars_len = self.char_encode(string_batch)
+        # bpes, bpe_len, bpes_mask = self.bpe_encode(string_batch)
+        # chars, bpes, bpes_mask = chars.transpose(0,1), bpes.transpose(0,1), bpes_mask.transpose(0,1)
         # print('next:', time.time()-start)
-                        
+        chars, chars_len, bpes, bpe_len, bpes_mask = None, None, None, None, None         
         return chars, chars_len, bpes, bpe_len, bpes_mask, batch.text, batch.udtags, lang_idx
 
 # class POSIterator:

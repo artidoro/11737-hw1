@@ -1,9 +1,10 @@
 {
+    "nb_samples":100000,
     "embedding_dim": 300,
     "lang_embeddding_dim": 20,
     "hidden_dim":128,
     "n_layers":4,
     "bidirectional":true,
     "dropout":0.25,
-    "batch_size": 128
+    "batch_size": 32
 }
